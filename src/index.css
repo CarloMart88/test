@@ -1,0 +1,23 @@
+*{
+box-sizing: border-box;
+margin: 0 auto;
+padding: 0 auto;
+}
+
+.logo {
+  height: 100px;
+} 
+
+header {
+  background-color: rgb(165, 42, 42);
+}
+
+.my-button {
+  background-color: #ec812f;
+  border: 2px solid black;
+  padding: 15px;
+}
+
+.none{
+  text-decoration: none;
+}
