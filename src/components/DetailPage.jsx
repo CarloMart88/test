@@ -84,20 +84,9 @@ const eventi = [
 
 function DetailPage() {
   const { id } = useParams();
-  const eventoId = Number(id);
-  const evento = eventi.find((e) => e.id === eventoId);
-  const [search, setSearch] = useState("");
 
-  if (!evento) {
-    return (
-      <div className="text-center my-5">
-        <h3>Evento non trovato</h3>
-        <Link to="/" className="btn btn-primary mt-3">
-          Torna agli eventi
-        </Link>
-      </div>
-    );
-  }
+  const evento = eventi.find((e) => e.id === parseInt(id));
+  const [search, setSearch] = useState("");
 
   const partecipantiFiltrati = evento.partecipanti.filter((p) =>
     `${p.nome} ${p.cognome}`.toLowerCase().includes(search.toLowerCase())
@@ -136,17 +125,11 @@ function DetailPage() {
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target={`#${collapseId}`}
-                        aria-expanded="false"
-                        aria-controls={collapseId}
                       >
                         {p.nome} {p.cognome}
                       </button>
 
-                      <div
-                        id={collapseId}
-                        className="collapse"
-                        data-bs-parent={`#${accordionId}`}
-                      >
+                      <div id={collapseId} className="collapse">
                         <div className="card-body">
                           <ul className="list-unstyled mb-0">
                             <li>

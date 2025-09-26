@@ -11,7 +11,7 @@ const Header = () => {
           <div className="row">
             <div className="col-12 justify-content-start">
               <div className="col-8 d-flex  align-items-center text-start ">
-                <img className="logo" src={logo} alt="Logo" />
+                <img className="logo mr-2" src={logo} alt="Logo" />
                 <h1 className="open-sans-uniquifier orange  padding">
                   BOOLTRIP
                 </h1>
