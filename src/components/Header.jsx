@@ -1,6 +1,9 @@
 import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import logo from "../assets/logo3.webp";
+import { NavLink } from "react-router-dom";
 
-function Header() {
+const Header = () => {
   return (
     <>
       <header className="py-3">
@@ -8,18 +11,8 @@ function Header() {
           <div className="row">
             <div className="col-12">
               <div className="d-flex align-items-center justify-content-between">
-                <img className="logo" src="../vite.svg" alt="Logo" />
-                <h1>Booltrip</h1>
-                <nav>
-                  <ul className="list-unstyled d-flex">
-                    <li className="ms-4">
-                      <button className="my-button">Home</button>
-                    </li>
-                    <li className="ms-4">
-                      <button className="my-button">Login</button>
-                    </li>
-                  </ul>
-                </nav>
+                <img className="logo" src={logo} alt="Logo" />
+                <h1 className="open-sans-uniquifier orange">BOOLTRIP</h1>
               </div>
             </div>
           </div>
@@ -27,6 +20,6 @@ function Header() {
       </header>
     </>
   );
-}
+};
 
 export default Header;

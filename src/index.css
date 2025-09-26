@@ -5,6 +5,7 @@ padding: 0 auto;
 }
 
 .logo {
+  width: 100px;
   height: 100px;
 } 
 
@@ -16,6 +17,20 @@ header {
   background-color: #ec812f;
   border: 2px solid black;
   padding: 15px;
+}
+
+.open-sans-uniquifier  {
+  font-family: "Rubik Moonrocks", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.orange {
+  color: #ec812f
+}
+
+.brown {
+  color: rgb(165, 42, 42);
 }
 
 .none{

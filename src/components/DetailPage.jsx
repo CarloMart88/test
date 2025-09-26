@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, NavLink } from "react-router-dom";
+import ListCard from "./ListCard";
 
 const eventi = [
   {
@@ -87,17 +88,6 @@ function DetailPage() {
   const evento = eventi.find((e) => e.id === parseInt(id));
   const [search, setSearch] = useState("");
 
-  if (!evento) {
-    return (
-      <div className="text-center my-5">
-        <h3>Evento non trovato</h3>
-        <Link to="/" className="btn btn-primary mt-3">
-          Torna agli eventi
-        </Link>
-      </div>
-    );
-  }
-
   // Filtro dei partecipanti basato sulla ricerca
   const partecipantiFiltrati = evento.partecipanti.filter((p) =>
     `${p.nome} ${p.cognome}`.toLowerCase().includes(search.toLowerCase())
@@ -122,40 +112,30 @@ function DetailPage() {
             <h3 className="mt-4">Partecipanti</h3>
             <ul className="list-group">
               {partecipantiFiltrati.length > 0 ? (
-                partecipantiFiltrati.map((p) => (
-                  <li key={p.id} className="list-group-item">
-                    <strong></strong>
-                    <br />
-                    <p className="d-inline-flex gap-1">
-                      <a
-                        data-bs-toggle="collapse"
-                        href="#collapseExample"
-                        role="button"
-                        aria-expanded="false"
-                        aria-controls="collapseExample"
-                      >
-                        {p.nome} {p.cognome}
-                      </a>
-                    </p>
-                    <div className="collapse" id="collapseExample">
-                      <div className="card card-body">
-                        <ul>
-                          <li>Codice fiscale: {p.codiceFiscale}</li>
-                          <li>Email: {p.email}</li>
-                          <li>: {p.cellulare}</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </li>
-                ))
+                partecipantiFiltrati.map((p) => {
+                  const collapseId = `collapse-${evento.id}-${p.id}`;
+                  return <ListCard collapseId={collapseId} p={p} />;
+                })
               ) : (
                 <li className="list-group-item">Nessun partecipante trovato</li>
               )}
             </ul>
-
-            <Link to="/" className="btn btn-primary mt-3">
-              Torna agli eventi
-            </Link>
+            <div className="row my-5">
+              <div className="col-12 my-5">
+                <nav>
+                  <ul className="list-unstyled">
+                    <li className="ms-4">
+                      <NavLink
+                        to="/"
+                        className="my-button open-sans-uniquifier text-decoration-none brown"
+                      >
+                        Home
+                      </NavLink>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
           </div>
         </div>
       </div>
