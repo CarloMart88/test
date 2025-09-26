@@ -100,26 +100,43 @@ function Homepage() {
               <th>Operatore</th>
               <th>Destinazione</th>
               <th>Periodo</th>
+              <th>Stato</th>
             </tr>
           </thead>
           <tbody className="text-center">
             {filterEventi.length > 0 ? (
-              filterEventi.map((evento) => (
-                <tr key={evento.id}>
-                  <td>{evento.operatore}</td>
-                  <td>
-                    <Link className="none" to={`/dettaglio/${evento.id}`}>
-                      {evento.location}
-                    </Link>
-                  </td>
-                  <td>
-                    {evento.dataInizio} - {evento.dataFine}
-                  </td>
-                </tr>
-              ))
+              filterEventi.map((evento) => {
+                let badgeClass = "bg-secondary";
+                if (evento.status === "pronto") badgeClass = "bg-success";
+                else if (evento.status === "finito") badgeClass = "bg-danger";
+                else if (evento.status === "non iniziato")
+                  badgeClass = "bg-warning";
+
+                return (
+                  <tr key={evento.id}>
+                    <td>{evento.operatore}</td>
+                    <td>
+                      <Link
+                        className="text-decoration-none"
+                        to={`/dettaglio/${evento.id}`}
+                      >
+                        {evento.location}
+                      </Link>
+                    </td>
+                    <td>
+                      {evento.dataInizio} - {evento.dataFine}
+                    </td>
+                    <td>
+                      <span className={`badge ${badgeClass}`}>
+                        {evento.status}
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })
             ) : (
               <tr>
-                <td>Nessun evento trovato</td>
+                <td className="text-center">Nessun evento trovato</td>
               </tr>
             )}
           </tbody>
