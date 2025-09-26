@@ -119,7 +119,7 @@ function Homepage() {
               ))
             ) : (
               <tr>
-                <td colSpan={2}>Nessun evento trovato</td>
+                <td>Nessun evento trovato</td>
               </tr>
             )}
           </tbody>

@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useParams, Link, NavLink } from "react-router-dom";
-import ListCard from "./ListCard";
+import { useParams, Link } from "react-router-dom";
 
 const eventi = [
   {
@@ -85,13 +84,27 @@ const eventi = [
 
 function DetailPage() {
   const { id } = useParams();
-  const evento = eventi.find((e) => e.id === parseInt(id));
+  const eventoId = Number(id);
+  const evento = eventi.find((e) => e.id === eventoId);
   const [search, setSearch] = useState("");
 
-  // Filtro dei partecipanti basato sulla ricerca
+  if (!evento) {
+    return (
+      <div className="text-center my-5">
+        <h3>Evento non trovato</h3>
+        <Link to="/" className="btn btn-primary mt-3">
+          Torna agli eventi
+        </Link>
+      </div>
+    );
+  }
+
   const partecipantiFiltrati = evento.partecipanti.filter((p) =>
     `${p.nome} ${p.cognome}`.toLowerCase().includes(search.toLowerCase())
   );
+
+  // id dell'accordion unico per evento
+  const accordionId = `partecipantiAccordion-${evento.id}`;
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center text-center my-5">
@@ -101,6 +114,7 @@ function DetailPage() {
             <h2 className="mb-3">
               {evento.location} ({evento.dataInizio} - {evento.dataFine})
             </h2>
+
             <input
               type="text"
               placeholder="Cerca partecipante..."
@@ -110,31 +124,60 @@ function DetailPage() {
             />
 
             <h3 className="mt-4">Partecipanti</h3>
-            <ul className="list-group">
+
+            <div id={accordionId}>
               {partecipantiFiltrati.length > 0 ? (
                 partecipantiFiltrati.map((p) => {
-                  const collapseId = `collapse-${evento.id}-${p.id}`;
-                  return <ListCard collapseId={collapseId} p={p} />;
+                  const collapseId = `p-${evento.id}-${p.id}`; // unico tra eventi
+                  return (
+                    <div className="card col-7 mb-2 text-start my-3" key={p.id}>
+                      <button
+                        className="btn btn-link text-decoration-none fw-bold text-danger-emphasis"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target={`#${collapseId}`}
+                        aria-expanded="false"
+                        aria-controls={collapseId}
+                      >
+                        {p.nome} {p.cognome}
+                      </button>
+
+                      <div
+                        id={collapseId}
+                        className="collapse"
+                        data-bs-parent={`#${accordionId}`}
+                      >
+                        <div className="card-body">
+                          <ul className="list-unstyled mb-0">
+                            <li>
+                              <strong>Codice fiscale:</strong> {p.codiceFiscale}
+                            </li>
+                            <li>
+                              <strong>Email:</strong> {p.email}
+                            </li>
+                            <li>
+                              <strong>Cellulare:</strong> {p.cellulare}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  );
                 })
               ) : (
-                <li className="list-group-item">Nessun partecipante trovato</li>
+                <div className="alert alert-secondary">
+                  Nessun partecipante trovato
+                </div>
               )}
-            </ul>
-            <div className="row my-5">
-              <div className="col-12 my-5">
-                <nav>
-                  <ul className="list-unstyled">
-                    <li className="ms-4">
-                      <NavLink
-                        to="/"
-                        className="my-button open-sans-uniquifier text-decoration-none brown"
-                      >
-                        Home
-                      </NavLink>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
+            </div>
+            <div className="to-home-btn">
+              <Link
+                className="square-btn-to-home"
+                to="/"
+                title="Torna alla homepage"
+              >
+                <i className="fas fa-house"></i>
+              </Link>
             </div>
           </div>
         </div>

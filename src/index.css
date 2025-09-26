@@ -13,7 +13,7 @@ header {
   background-color: rgb(165, 42, 42);
 }
 
-.my-button {
+.my-button { 
   background-color: #ec812f;
   border: 2px solid black;
   padding: 15px;
@@ -26,7 +26,7 @@ header {
 }
 
 .orange {
-  color: #ec812f
+  color: rgb(236, 129, 47)
 }
 
 .brown {
@@ -35,4 +35,29 @@ header {
 
 .none{
   text-decoration: none;
+}
+
+.to-home-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 20px;
+}
+
+.square-btn-to-home {
+  border: 2px solid white;
+  padding: 30px;
+  background-color: rgb(236, 129, 47);
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.square-btn-to-home:hover {
+  border: 2px solid rgb(236, 129, 47);
+  background-color: white;
+  color: rgb(236, 129, 47);
+}
+
+.padding{
+  padding-right: 200px;
 }

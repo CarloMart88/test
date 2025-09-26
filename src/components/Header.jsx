@@ -9,10 +9,12 @@ const Header = () => {
       <header className="py-3">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-12">
-              <div className="d-flex align-items-center justify-content-between">
+            <div className="col-12 justify-content-start">
+              <div className="col-8 d-flex  align-items-center text-start ">
                 <img className="logo" src={logo} alt="Logo" />
-                <h1 className="open-sans-uniquifier orange">BOOLTRIP</h1>
+                <h1 className="open-sans-uniquifier orange  padding">
+                  BOOLTRIP
+                </h1>
               </div>
             </div>
           </div>
